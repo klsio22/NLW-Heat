@@ -3,8 +3,8 @@ import axios from "axios"; //importação via node
 /* 
   Receber code (string) (yes)
   Recuperar o access_tok no github (yes)
-  Recuperar o info do usuário no github
-  Veruficar se o usario existe no DB
+  Recuperar o info do usuário no github (yes)
+  Verificar se o usario existe no DB
   ---- SIM = Gera um token
   ---- Não = cria no DB , gera um token
   retornar o token com as infos do user
@@ -13,6 +13,14 @@ import axios from "axios"; //importação via node
 //Criamos uma interface para conseguir ter acesso ao access_token
 interface IAccessTokenResponse {
   access_token: string
+}
+
+// Recuperar o info do usuário no github
+interface IUserResponse{
+  avatar_url:string;
+  login: string,
+  id:number,
+  name:string
 }
 
 class AuthenticateUserService {
@@ -31,7 +39,7 @@ class AuthenticateUserService {
       },
     });
 
-    const response = await axios.get("https://api.github.com/user", {
+    const response = await axios.get<IUserResponse>("https://api.github.com/user", {
       headers: {
         authorization: `Bearer ${accessTokenResponse.access_token}`
       }
