@@ -7,9 +7,9 @@ import { sign } from "jsonwebtoken";
   Recuperar o access_tok no github (yes)
   Recuperar o info do usuário no github (yes)
   Verificar se o usario existe no DB (yes)
-  ---- SIM = Gera um token (no)
+  ---- SIM = Gera um token (yes)
   ---- Não = cria no DB , gera um token
-  retornar o token com as infos do user
+  retornar o token com as infos do userpo
 
 */
 //Criamos uma interface para conseguir ter acesso ao access_token
