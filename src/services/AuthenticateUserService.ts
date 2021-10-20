@@ -9,7 +9,7 @@ import { sign } from "jsonwebtoken";
   Verificar se o usario existe no DB (yes)
   ---- SIM = Gera um token (yes)
   ---- Não = cria no DB , gera um token
-  retornar o token com as infos do userpo
+  retornar o token com as infos do usario
 
 */
 //Criamos uma interface para conseguir ter acesso ao access_token
