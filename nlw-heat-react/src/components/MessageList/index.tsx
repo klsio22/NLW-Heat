@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 type Message = {
   id: string;
@@ -115,7 +115,10 @@ export function MessageList() {
       <ul className={styles.messageList}>
         {messages.map((message) => {
           return (
-            <motion.li key={message.id} className={styles.message}>
+            <motion.li
+              key={message.id.replace(/\-/g, "")}
+              className={styles.message}
+            >
               <p className={styles.messageContent}>{message.text}</p>
               <div className={styles.messageUser}>
                 <div className={styles.userImage}>
