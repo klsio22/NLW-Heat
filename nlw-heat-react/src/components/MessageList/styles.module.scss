@@ -5,8 +5,8 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  //Pegar a primira imagem dendo da minha class
-  svg {
+  //Pegar a primira imagem dentro da minha class
+  > svg {
     height: 28px;
     margin: 32px 0;
     z-index: 10;

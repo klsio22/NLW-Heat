@@ -1,6 +1,29 @@
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
 import styles from "./styles.module.scss";
 
+type Message = {
+  id: string;
+  text: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+};
+
 export function MessageList() {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  /* 
+  A função user afeact usa dois parametros uma o que eu quero retornar e outra
+  quanto eu quero retornar 
+*/
+  useEffect(() => {
+    api.get<Message[]>("messages/last3").then((response) => {
+      setMessages(response.data);
+    });
+  }, []);
+
   return (
     <div className={styles.messageListWrapper}>
       <svg
@@ -11,8 +34,8 @@ export function MessageList() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M47.6226 12.0055C47.6245 14.3689 46.9124 16.6797 45.5763 18.6457C44.2402 20.6118 42.3401 22.1446 40.1165 23.0504C37.8929 23.9561 35.4456 24.1941 33.0842 23.7341C30.7227 23.2742 28.5533 22.1371 26.8503 20.4666C25.1473 18.7961 23.9873 16.6672 23.5169 14.3493C23.3822 13.6857 23.3058 13.0151 23.287 12.3447C23.1991 15.2538 21.9835 18.0257 19.8811 20.0897C17.697 22.2339 14.7348 23.4384 11.646 23.4384H0V0.572239H11.646C14.7348 0.572239 17.697 1.77678 19.8811 3.9209C21.9858 5.98715 23.2017 8.76285 23.2873 11.6755C23.3291 10.2295 23.6384 8.79537 24.2078 7.44503C25.1287 5.26134 26.6885 3.39482 28.6901 2.08158C30.6917 0.768345 33.0451 0.0673828 35.4525 0.0673828C38.6769 0.0724144 41.768 1.33153 44.0489 3.56899C46.3299 5.80644 47.6149 8.83996 47.6226 12.0055ZM78.1449 0.571657L74.8355 12.5287L71.5358 0.571657H65.4604L62.1122 12.5669L58.8028 0.571657H49.4277L57.6964 23.4378H65.4604L68.5078 14.1675L71.5358 23.4378H79.2998L87.52 0.571657H78.1449ZM112.074 0.571657V23.4378H103.242V15.2536H97.7395V23.4378H88.9079V0.571657H97.7395V8.75587H103.252V0.571657H112.074ZM115.383 0.571657V23.4378H124.205V0.571657H115.383ZM143.518 16.8924V23.4378H127.514V0.571657H136.346V16.9305L143.518 16.8924ZM154.543 9.2608V7.079L161.715 7.11709V0.571657H145.721V23.4378H161.715V16.8924H154.543V14.7106H160.065V9.2608H154.543Z"
           fill="url(#paint0_linear_61322:3225)"
         />
@@ -53,51 +76,26 @@ export function MessageList() {
             y2="88.2688"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#FF008E" />
-            <stop offset="1" stop-color="#FFCD1E" />
+            <stop stopColor="#FF008E" />
+            <stop offset="1" stopColor="#FFCD1E" />
           </linearGradient>
         </defs>
       </svg>
 
       <ul className={styles.messageList}>
-        <li className={styles.message}>
-          <p className={styles.messageContent}>
-            Não vejo a hora de começar esse evento, com certeza vai ser o melhor
-            de todos os tempos, vamooo pra cima! 🔥🔥
-          </p>
-          <div className={styles.messageUser}>
-            <div className={styles.userImage}>
-              <img src="https://github.com/klsio22.png" alt="Diego" />
-            </div>
-            <span>Klesio Nasscimento</span>
-          </div>
-        </li>
-
-        <li className={styles.message}>
-          <p className={styles.messageContent}>
-            Não vejo a hora de começar esse evento, com certeza vai ser o melhor
-            de todos os tempos, vamooo pra cima! 🔥🔥
-          </p>
-          <div className={styles.messageUser}>
-            <div className={styles.userImage}>
-              <img src="https://github.com/klsio22.png" alt="Diego" />
-            </div>
-            <span>Klesio Nasscimento</span>
-          </div>
-        </li>
-
-        <li className={styles.message}>
-          <p className={styles.messageContent}>
-            Não vejo a hora de começar esse evento, com certeza vai ser o melhor
-            de todos os tempos, vamooo pra cima! 🔥🔥
-          </p>
-          <div className={styles.messageUser}>
-            <div className={styles.userImage}>
-              <img src="https://github.com/klsio22.png" alt="Diego" />
-            </div>
-            <span>Klesio Nasscimento</span>
-          </div>
-        </li>
+        {messages.map((message) => {
+          return (
+            <li key={message.id} className={styles.message}>
+              <p className={styles.messageContent}>{message.text}</p>
+              <div className={styles.messageUser}>
+                <div className={styles.userImage}>
+                  <img src={message.user.avatar_url} alt={message.user.name} />
+                </div>
+                <span>{message.user.name}</span>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
