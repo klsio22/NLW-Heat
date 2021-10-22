@@ -26,9 +26,9 @@ type AuthResponse = {
     id: string;
     avatar_url: string;
     name: string;
-    login: string
+    login: string;
   };
-}; 
+};
 
 export function AuthProvider(props: AuthProvider) {
   const [user, setUser] = useState<User | null>(null);
@@ -42,12 +42,24 @@ export function AuthProvider(props: AuthProvider) {
 
     const { token, user } = response.data;
 
-    localStorage.setItem("@dowhile:token", token)
+    localStorage.setItem("@dowhile:token", token);
     //console.log(user);
 
     setUser(user);
   }
-  
+
+  useEffect(() => {
+    const token = localStorage.getItem("@dowhile:token");
+
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get<User>("profile").then((response) => {
+       // console.log(response.data);
+        setUser(response.data)
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const url = window.location.href;
     const hasGithucode = url.includes("?code=");
