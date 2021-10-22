@@ -14,6 +14,7 @@ type User = {
 //seta dados dentro do contexto de autenticação do usuario
 type AuthContextData = {
   user: User | null;
+  isSigningIn: boolean;
   signInUrl: string;
   signOut: () => void;
 };
@@ -54,7 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   /* const signInUrl = `https://github.com/login/oauth/authorize?Scope=user&client_id=9fdef5059569958d1978`; */
 
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSigningIn, setIsSignIn] = useState(false);
 
   async function signIn(githubCode: string) {
     try {
@@ -121,7 +122,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${clientId}&redirect_uri=${redirectUrl}`;
 
   return (
-    <AuthContext.Provider value={{ signInUrl, user, signOut }}>
+    <AuthContext.Provider value={{ user, isSigningIn, signInUrl, signOut  }}>
       {children}
     </AuthContext.Provider>
   );

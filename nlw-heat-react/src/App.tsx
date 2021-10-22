@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import styles from "./App.module.scss";
 import { LoginBox } from "./components/LoginBox/Index";
 import { MessageList } from "./components/MessageList";
-import { SendMessageForm } from "./components/sendMessageForm";
+import { SendMessageForm } from "./components/SendMessageForm";
 import { useAuth } from "./contexts/useAuth";
 
 export function App() {

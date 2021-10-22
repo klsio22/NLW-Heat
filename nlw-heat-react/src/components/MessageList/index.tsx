@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
-
+import { motion } from 'framer-motion';
 
 type Message = {
   id: string;
@@ -115,7 +115,7 @@ export function MessageList() {
       <ul className={styles.messageList}>
         {messages.map((message) => {
           return (
-            <li key={message.id} className={styles.message}>
+            <motion.li key={message.id} className={styles.message}>
               <p className={styles.messageContent}>{message.text}</p>
               <div className={styles.messageUser}>
                 <div className={styles.userImage}>
@@ -123,7 +123,7 @@ export function MessageList() {
                 </div>
                 <span>{message.user.name}</span>
               </div>
-            </li>
+            </motion.li>
           );
         })}
       </ul>
