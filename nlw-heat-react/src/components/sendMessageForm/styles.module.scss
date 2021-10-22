@@ -1,13 +1,12 @@
 .sendMessageFormWrapper {
   background: #1b1b1f;
   padding: 24px;
-  align-items: center;
-
+  align-self: center;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
   position: relative;
 }
 
@@ -108,7 +107,7 @@
     cursor: pointer;
     padding: 0 32px;
     height: 40px;
-    color: #fff ;
+    color: #fff;
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
