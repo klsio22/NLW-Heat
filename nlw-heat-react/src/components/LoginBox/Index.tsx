@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { VscGithubInverted } from "react-icons/vsc";
 import { useAuth } from "../../contexts/useAuth";
 import styles from "./styles.module.scss";

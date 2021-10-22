@@ -16,7 +16,7 @@ type AuthContextData = {
   user: User | null;
   isSigningIn: boolean;
   signInUrl: string;
-  signOut: () => void;
+  signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext({} as AuthContextData);
@@ -29,8 +29,8 @@ tranformadas em propriedade react*/
 };
  */
 
-const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
-const redirectUrl = import.meta.env.VITE_GITHUB_CALLBACK_URL;
+/* const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+const redirectUri = import.meta.env.VITE_GITHUB_CALLBACK_URL; */
 
 //Buscar uma resposta no banco de dados se usuario já está autenticado
 type AuthResponse = {
@@ -58,6 +58,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isSigningIn, setIsSignIn] = useState(false);
 
   async function signIn(githubCode: string) {
+    setIsSignIn(true)
+    
     try {
       const response = await api.post<AuthResponse>("authenticate", {
         code: githubCode,
@@ -110,16 +112,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const hasGithucode = url.includes("?code=");
 
     if (hasGithucode) {
-      const [urlWithoutCode, githubCode] = url.split("?code=");
+      const [urlWithoutCode, githubAuthCode] = url.split("?code=");
 
       //console.log({ urlWithoutCode, githubCode });
       window.history.pushState({}, "", urlWithoutCode);
 
-      signIn(githubCode);
+      signIn(githubAuthCode);
     }
   }, []);
 
-  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${clientId}&redirect_uri=${redirectUrl}`;
+  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=9fdef5059569958d1978&redirect_uri=http://localhost:3000`
+
 
   return (
     <AuthContext.Provider value={{ user, isSigningIn, signInUrl, signOut  }}>
