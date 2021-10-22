@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import io from "socket.io-client";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
 
@@ -11,6 +12,15 @@ type Message = {
   };
 };
 
+const messagesQueue: Message[] = [];
+
+const socket = io("http://localhost:4001");
+
+socket.on("new_message", (newMessage) => {
+  //console.log(newMessage);
+  messagesQueue.push(newMessage)
+});
+
 export function MessageList() {
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -18,6 +28,28 @@ export function MessageList() {
   A função user afeact usa dois parametros uma o que eu quero retornar e outra
   quanto eu quero retornar 
 */
+
+  useEffect(() => {
+    const timer = setInterval(() =>{
+      if(messagesQueue.length > 0){
+        /* setMessages([
+          messagesQueue[0],
+          messages[0],
+          messages[1],
+        ].filter(Boolean)) */
+
+        setMessages(prevState => [
+          messagesQueue[0],
+          prevState[0],
+          prevState[1],
+        ].filter(Boolean))
+
+      }
+      messagesQueue.shift()
+
+    }, 2000)
+  },[])
+
   useEffect(() => {
     api.get<Message[]>("messages/last3").then((response) => {
       setMessages(response.data);
