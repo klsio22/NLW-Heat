@@ -18,7 +18,7 @@ const socket = io("http://localhost:4001");
 
 socket.on("new_message", (newMessage) => {
   //console.log(newMessage);
-  messagesQueue.push(newMessage)
+  messagesQueue.push(newMessage);
 });
 
 export function MessageList() {
@@ -30,25 +30,22 @@ export function MessageList() {
 */
 
   useEffect(() => {
-    const timer = setInterval(() =>{
-      if(messagesQueue.length > 0){
+    const timer = setInterval(() => {
+      if (messagesQueue.length > 0) {
         /* setMessages([
           messagesQueue[0],
           messages[0],
           messages[1],
         ].filter(Boolean)) */
 
-        setMessages(prevState => [
-          messagesQueue[0],
-          prevState[0],
-          prevState[1],
-        ].filter(Boolean))
-
+        setMessages((prevState) =>
+          [messagesQueue[0], prevState[0], prevState[1]].filter(Boolean)
+        );
       }
-      messagesQueue.shift()
-
-    }, 2000)
-  },[])
+      messagesQueue.shift();
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     api.get<Message[]>("messages/last3").then((response) => {

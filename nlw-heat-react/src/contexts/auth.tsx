@@ -75,7 +75,7 @@ export function AuthProvider(props: AuthProvider) {
       api.get<User>("profile").then((response) => {
         // console.log(response.data);
         setUser(response.data);
-      });
+      }); 
     }
   }, []);
 
