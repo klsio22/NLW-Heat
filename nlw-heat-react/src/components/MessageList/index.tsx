@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
 
+
 type Message = {
   id: string;
   text: string;

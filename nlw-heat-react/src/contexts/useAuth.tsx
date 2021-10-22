@@ -1,6 +1,8 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { useEffect } from "react";
 import { api } from "../services/api";
+
+type AuthProviderProps = PropsWithChildren<{}>;
 
 type User = {
   id: string;
@@ -16,13 +18,18 @@ type AuthContextData = {
   signOut: () => void;
 };
 
-export const AuthContext = createContext({} as AuthContextData);
+const AuthContext = createContext({} as AuthContextData);
 
 /* Recebe filho do tipo ReactNode , onde as informações do node são 
 tranformadas em propriedade react*/
-type AuthProvider = {
+
+/* type AuthProvider = {
   children: ReactNode;
 };
+ */
+
+const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+const redirectUrl = import.meta.env.VITE_GITHUB_CALLBACK_URL;
 
 //Buscar uma resposta no banco de dados se usuario já está autenticado
 type AuthResponse = {
@@ -35,33 +42,44 @@ type AuthResponse = {
   };
 };
 
+type ProfileResponse = AuthResponse["user"];
+
 //“props” (que significa propriedades) com dados e retorna um elemento React
 
 /* Conceitualmente, componentes são como funções JavaScript. Eles aceitam entradas arbitrárias (chamadas “props”) e retornam elementos React que descrevem o que deve aparecer na tela.
  */
-export function AuthProvider(props: AuthProvider) {
+
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
 
-  const signInUrl = `https://github.com/login/oauth/authorize?Scope=user&client_id=9fdef5059569958d1978`;
+  /* const signInUrl = `https://github.com/login/oauth/authorize?Scope=user&client_id=9fdef5059569958d1978`; */
+
+  const [isSignIn, setIsSignIn] = useState(false);
 
   async function signIn(githubCode: string) {
-    const response = await api.post<AuthResponse>("authenticate", {
-      code: githubCode,
-    });
-    
-    const { token, user } = response.data;
+    try {
+      const response = await api.post<AuthResponse>("authenticate", {
+        code: githubCode,
+      });
 
-    /* Mesmo que o usuario não dar refresh na pagina ele eviará o login junto com o 
+      const { token, user } = response.data;
+
+      /* Mesmo que o usuario não dar refresh na pagina ele eviará o login junto com o 
     token de autenticação, para saber se o usuario está autenticado ou não */
-    api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-    localStorage.setItem("@dowhile:token", token);
-    //console.log(user);
-    setUser(user);
+      localStorage.setItem("@dowhile:token", token);
+      //console.log(user);
+      setUser(user);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSignIn(false);
+    }
   }
 
   //Delogar o usuario
-  function signOut() {
+  async function signOut() {
     setUser(null);
     localStorage.removeItem("@dowhile:token");
   }
@@ -72,10 +90,16 @@ export function AuthProvider(props: AuthProvider) {
 
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      api.get<User>("profile").then((response) => {
-        // console.log(response.data);
-        setUser(response.data);
-      }); 
+
+      api
+        .get<ProfileResponse>("/profile")
+        .then((response) => {
+          // console.log(response.data);
+          setUser(response.data);
+        })
+        .catch(() => {
+          signOut();
+        });
     }
   }, []);
 
@@ -94,9 +118,16 @@ export function AuthProvider(props: AuthProvider) {
     }
   }, []);
 
+  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${clientId}&redirect_uri=${redirectUrl}`;
+
   return (
     <AuthContext.Provider value={{ signInUrl, user, signOut }}>
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  return context;
 }
