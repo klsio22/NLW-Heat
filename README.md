@@ -50,7 +50,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 > Obs.: Nesse projeto temos autenticação via OAuth com o GitHub
 
-#### No back-end sigua os seguindes passos :
+#### No back-end siga os seguindes passos :
 
 - Clone o repositório e acesse a pasta **nlw-heat-node**;
 - Faça uma copia do arquivo `.env.example` para `.env` e preencha com as suas credenciais do GitHub, esse arquivo .env fica na pasta padrão do projeto **nlw-heat-node**;
