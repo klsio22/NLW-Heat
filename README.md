@@ -21,8 +21,6 @@
 </p>
 
 
-
-
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
@@ -66,7 +64,7 @@ A aplicação pode ser acessada em [`localhost:4001`](http://localhost:4001/) no
 - Instale as dependências com `yarn`;
 - Inicie o servidor com `yarn dev`;
 
-  A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no front-end.
+A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no front-end.
 
 #### Documentação de pacotes usados durante o projeto no notion:
 
