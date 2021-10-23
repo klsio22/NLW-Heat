@@ -53,7 +53,7 @@ type ProfileResponse = AuthResponse["user"];
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
 
-  /* const signInUrl = `https://github.com/login/oauth/authorize?Scope=user&client_id=9fdef5059569958d1978`; */
+   const signInUrl = `https://github.com/login/oauth/authorize?Scope=user&client_id=9fdef5059569958d1978`; 
 
   const [isSigningIn, setIsSignIn] = useState(false);
 
@@ -121,8 +121,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []);
 
-  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=9fdef5059569958d1978&redirect_uri=http://localhost:3000`
-
+  /* const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=9fdef5059569958d1978&redirect_uri=http://localhost:3000`
+ */
 
   return (
     <AuthContext.Provider value={{ user, isSigningIn, signInUrl, signOut  }}>

@@ -36,7 +36,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-✈️O objetivo dessa aplicação web é desenvolver um app cujo objetivo é autenticar o usuário que possui uma conta no gitHub em tempo real , para que o usuário possa enviar suas mensagens  do que ele/ela espera do evento, e mesmo após a sua saída do login da página do evento suas mensagens continuam visíveis.
+✈️O objetivo dessa aplicação web é desenvolver um app que faz a autenticação do usuário que possui uma conta no gitHub em tempo real , para que o usuário possa enviar suas mensagens do que ele/ela espera do evento, e mesmo após a sua saída do login da página do evento suas mensagens continuam visíveis.
 
 ## 🔖 Layout
 
