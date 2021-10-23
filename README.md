@@ -60,7 +60,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 A aplicação pode ser acessada em [`localhost:4001`](http://localhost:4001/) no back-end.
 
-#### No Front-end sigua os seguindes passos :
+#### No Front-end siga os seguindes passos :
 
 - Instale as dependências com `yarn`;
 
