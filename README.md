@@ -62,11 +62,11 @@ A aplicação pode ser acessada em [`localhost:4001`](http://localhost:4001/) no
 
 #### No Front-end siga os seguindes passos :
 
+- acesse a pasta **nlw-heat-react**;
 - Instale as dependências com `yarn`;
-
 - Inicie o servidor com `yarn dev`;
 
-  A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no back-end.
+  A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no front-end.
 
 #### Documentação de pacotes usados durante o projeto no notion:
 
