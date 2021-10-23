@@ -46,13 +46,33 @@ Você pode visualizar o layout do projeto através [desse link](https://www.figm
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
-## 📜 Documentação
+##  📜 Como executar
 
-### Para o projeto funcionar é necessário instalar os seguintes pacotes
+> Obs.: Nesse projeto temos autenticação via OAuth com o GitHub
 
-`yarn add node`
+#### No back-end sigua os seguindes passos :
+
+- Clone o repositório e acesse a pasta **nlw-heat-node**;
+- Faça uma copia do arquivo `.env.example` para `.env` e preencha com as suas credenciais do GitHub, esse arquivo .env fica na pasta padrão do projeto **nlw-heat-node**;
+- Instale as dependências com `yarn`;
+- Executa as migrations com `yarn prisma migrate dev`;
+- Inicie o servidor com `yarn dev`;
+
+A aplicação pode ser acessada em [`localhost:4001`](http://localhost:4001/) no back-end.
+
+#### No Front-end sigua os seguindes passos :
+
+- Instale as dependências com `yarn`;
+
+- Inicie o servidor com `yarn dev`;
+
+  A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no back-end.
+
+#### Documentação de pacotes usados durante o projeto:
+
+🌍 [Documentação NLW-Heat](https://www.notion.so/Documenta-o-NLW-Heat-020d835e28c14bb7bcf420744ddd2340)
 
 -----
 
-💪✍️ Projeto desenvolvido acompanhando o evento da Rocketset **NLW/Heat** junto a comunidade da Rocketset no [discord](http://starter-bot.rocketseat.dev/api/discord/login?param=YmFiZDBlNTQtNjBjZi00OWFhLWI3ZjAtYjhhOTYzYzE0MmY4)💪✍️
+💪✍️ Projeto desenvolvido acompanhando o evento da Rocketset **NLW/Heat** junto a comunidade da Rocketset no [discord](http://starter-bot.rocketseat.dev/api/discord/login?param=YmFiZDBlNTQtNjBjZi00OWFhLWI3ZjAtYjhhOTYzYzE0MmY4) .💪✍️
 
