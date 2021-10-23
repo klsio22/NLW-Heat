@@ -55,6 +55,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
    const signInUrl = `https://github.com/login/oauth/authorize?Scope=user&client_id=9fdef5059569958d1978`; 
 
+  //9fdef5059569958d1978 valor do meu cliente , cada client tem um diferente
+
   const [isSigningIn, setIsSignIn] = useState(false);
 
   async function signIn(githubCode: string) {
