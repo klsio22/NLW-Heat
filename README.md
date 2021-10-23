@@ -68,7 +68,7 @@ A aplicação pode ser acessada em [`localhost:4001`](http://localhost:4001/) no
 
   A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no back-end.
 
-#### Documentação de pacotes usados durante o projeto:
+#### Documentação de pacotes usados durante o projeto no notion:
 
 🌍 [Documentação NLW-Heat](https://www.notion.so/Documenta-o-NLW-Heat-020d835e28c14bb7bcf420744ddd2340)
 
