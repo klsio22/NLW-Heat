@@ -58,7 +58,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 A aplicação pode ser acessada em [`localhost:4001`](http://localhost:4001/) no back-end.
 
-#### No Front-end siga os seguindes passos :
+#### No Front-end siga os seguintes passos :
 
 - acesse a pasta **nlw-heat-react**;
 - Instale as dependências com `yarn`;
