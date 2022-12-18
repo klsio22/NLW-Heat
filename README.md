@@ -72,5 +72,5 @@ A aplicação pode ser acessada em [`localhost:3000`](http://localhost:3000) no 
 
 -----
 
-💪✍️ Projeto desenvolvido acompanhando o evento da Rocketset **NLW/Heat** junto a comunidade da Rocketset no [discord](http://starter-bot.rocketseat.dev/api/discord/login?param=YmFiZDBlNTQtNjBjZi00OWFhLWI3ZjAtYjhhOTYzYzE0MmY4) .💪✍️
+💪✍️ Projeto desenvolvido acompanhando o evento da Rocketseat **NLW/Heat** junto a comunidade da Rocketset no [discord](http://starter-bot.rocketseat.dev/api/discord/login?param=YmFiZDBlNTQtNjBjZi00OWFhLWI3ZjAtYjhhOTYzYzE0MmY4) .💪✍️
 
